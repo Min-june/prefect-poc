@@ -1,0 +1,11 @@
+{
+  "name": "prefect",
+  "version": "1.0.0",
+  "description": "Prefect boilerplate for Superb Platform",
+  "main": "index.js",
+  "scripts": {
+    "start": "docker-compose up; prefect server start"
+  },
+  "author": "Min-june Lee",
+  "license": "MIT"
+}
