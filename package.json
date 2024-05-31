@@ -4,7 +4,9 @@
   "description": "Prefect boilerplate for Superb Platform",
   "main": "index.js",
   "scripts": {
-    "start": "docker-compose up; prefect server start"
+    "start": "./start_prefect.sh",
+    "start:db": "docker-compose up -d",
+    "stop:db": "docker-compose down"
   },
   "author": "Min-june Lee",
   "license": "MIT"
