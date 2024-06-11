@@ -11,4 +11,30 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
-
+  
+  # prefect-server:
+  #   image: prefecthq/server:1.0.0
+  #   restart: always
+  #   volumes:
+  #     - ./volumes/prefect-server-config:/root/.prefect
+  #   ports:
+  #     - "8080:8080"
+  #   environment:
+  #     - PREFECT__SERVER__POSTGRES__HOST=prefect-postgres
+  #     - PREFECT__SERVER__POSTGRES__USER=${POSTGRES_USER}
+  #     - PREFECT__SERVER__POSTGRES__PASSWORD=${POSTGRES_PASSWORD}
+  #     - PREFECT__SERVER__POSTGRES__DB=${POSTGRES_DB}
+  #     - PREFECT__SERVER__GRAPHQL__PATH=/graphql
+  #     - PREFECT__SERVER__API__PATH=/api
+  #     - PREFECT__SERVER__UI__ENABLED=true
+  #     - PREFECT__SERVER__UI__GRAPHQL_ENDPOINT=http://localhost:8080/graphql
+  #     - PREFECT__SERVER__UI__API_ENDPOINT=http://localhost:8080/api
+  #     - PREFECT__SERVER__UI__GRAPHQL_PLAYGROUND_ENABLED=true
+  #     - PREFECT__SERVER__UI__GRAPHQL_INTROSPECTION_ENABLED=true
+  #     - PREFECT__SERVER__UI__GRAPHQL_INTROSPECTION_FORMAT=JSON
+  #     - PREFECT__SERVER__UI__GRAPHQL_INTROSPECTION_PATH=/graphql
+  #     - PREFECT__SERVER__UI__GRAPHQL_INTROSPECTION_METHOD=POST
+  #     - PREFECT__SERVER__UI__GRAPHQL_INTROSPECTION_HEADERS={"Content-Type":"application/json"}
+  #     - PREFECT__SERVER__UI__GRAPHQL_INTROSPECTION_PAYLOAD={"query":"{__schema{types{name}}}"}
+  #   depends_on:
+  #     - prefect-postgres

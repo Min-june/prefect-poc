@@ -6,7 +6,8 @@
   "scripts": {
     "start": "./start_prefect.sh",
     "start:db": "docker-compose up -d",
-    "stop:db": "docker-compose down"
+    "stop:db": "docker-compose down",
+    "start:worker": "prefect worker start --pool my-managed-pool"
   },
   "author": "Min-june Lee",
   "license": "MIT"
