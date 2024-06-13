@@ -1,0 +1,17 @@
+version: '3.9'
+services:
+  agent:
+    image: prefecthq/prefect:2-python3.10
+    restart: always
+    platform: linux/amd64
+    volumes:
+      - ../prefect:/root/.prefect
+    entrypoint: ["prefect", "worker", "start", "--pool", "CommonJobPool"]
+    env_file:
+      - .env
+    networks:
+      - prefect-agent-network
+
+networks:
+  prefect-agent-network:
+    name: prefect-agent-network

@@ -9,15 +9,13 @@ services:
       - "5432:5432"
     shm_size: 128mb
     healthcheck:
-      test: pg_isready -q -d $${POSTGRES_DB} -U $${POSTGRES_USER} | grep "accepting connections" || exit 1
+      test: pg_isready -q -d $POSTGRES_DB -U $POSTGRES_USER | grep "accepting connections" || exit 1
       interval: 10s
       retries: 60
       timeout: 2s
       start_period: 2s
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
+    env_file:
+      - .env
     networks:
       - prefect-network
 
@@ -28,20 +26,15 @@ services:
     volumes:
       - ./prefect:/root/.prefect
     ports:
-      - "${PREFECT_PORT}:${PREFECT_PORT}"
-    entrypoint:
-      [
-        "sh",
-        "-c",
-        "echo PREFECT_API_DATABASE_CONNECTION_URL=${PREFECT_API_DATABASE_CONNECTION_URL} && prefect server start"
-      ]
-    environment:
-      - PREFECT_UI_URL=http://${PREFECT_HOST}:${PREFECT_PORT}
-      - PREFECT_API_URL=http://${PREFECT_HOST}:${PREFECT_PORT}/api
-      - PREFECT_SERVER_API_HOST=0.0.0.0
-      - PREFECT_API_DATABASE_CONNECTION_URL=postgresql+asyncpg://postgres_user:postgres_password@database:5432/prefect
-      - PREFECT_API_DATABASE_ECHO=${PREFECT_API_DATABASE_ECHO}
-      - PREFECT_API_DATABASE_MIGRATE_ON_START=${PREFECT_API_DATABASE_MIGRATE_ON_START}
+      - ${PREFECT_PORT}:${PREFECT_PORT}
+    entrypoint: ["prefect", "server", "start"]
+      # [
+      #   "sh",
+      #   "-c",
+      #   "printenv && prefect server start"
+      # ]
+    env_file:
+      - .env
     depends_on:
       - database
     networks:
