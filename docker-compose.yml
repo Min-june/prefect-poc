@@ -24,10 +24,11 @@ services:
     restart: always
     platform: linux/amd64
     volumes:
-      - ./prefect:/root/.prefect
+      - ./volumes/prefect:/root/.prefect
     ports:
       - ${PREFECT_PORT}:${PREFECT_PORT}
-    entrypoint: ["prefect", "server", "start"]
+    entrypoint:
+      [ "prefect", "server", "start" ]
       # [
       #   "sh",
       #   "-c",
