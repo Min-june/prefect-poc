@@ -4,10 +4,9 @@
   "description": "Prefect boilerplate for Superb Platform",
   "main": "index.js",
   "scripts": {
-    "start": "./start_prefect.sh",
-    "start:db": "docker-compose up -d",
-    "stop:db": "docker-compose down",
-    "start:worker": "prefect worker start --pool my-managed-pool"
+    "start": "docker-compose up",
+    "stop": "docker-compose down",
+    "start:agent": "docker-compose -f ./prefect_agents/common_job_agent/docker-compose.yml up"
   },
   "author": "Min-june Lee",
   "license": "MIT"

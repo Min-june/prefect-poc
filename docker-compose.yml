@@ -29,11 +29,6 @@ services:
       - ${PREFECT_PORT}:${PREFECT_PORT}
     entrypoint:
       [ "prefect", "server", "start" ]
-      # [
-      #   "sh",
-      #   "-c",
-      #   "printenv && prefect server start"
-      # ]
     env_file:
       - .env
     depends_on:
