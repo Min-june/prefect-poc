@@ -6,7 +6,7 @@
   "scripts": {
     "start": "docker-compose up",
     "stop": "docker-compose down",
-    "start:agent": "docker-compose -f ./prefect_agents/common_job_agent/docker-compose.yml up"
+    "start:agent": "docker-compose -f ./agents/common/docker-compose.yml up"
   },
   "author": "Min-june Lee",
   "license": "MIT"
