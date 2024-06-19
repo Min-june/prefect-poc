@@ -6,7 +6,15 @@ services:
     platform: linux/amd64
     volumes:
       - ../prefect:/root/.prefect
-    entrypoint: ["prefect", "worker", "start", "--pool", "CommonJobPool"]
+      - ../../src:/app
+    entrypoint:
+      [
+        "prefect",
+        "worker",
+        "start",
+        "--pool",
+        "CommonJobPool"
+      ]
     env_file:
       - .env
     networks:

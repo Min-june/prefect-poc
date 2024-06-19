@@ -1,17 +1,24 @@
 version: '3.9'
 services:
   agent:
-    image: prefecthq/prefect:2-python3.10
-    restart: always
-    platform: linux/amd64
-    volumes:
-      - ../prefect:/root/.prefect
-    entrypoint: ["prefect", "worker", "start", "--pool", "CommonJobPool"]
+    build: .
+    image: prefect-agent:latest
+    runtime: nvidia
     env_file:
       - .env
     networks:
-      - prefect-agent-network
+      - prefect-gpu-agent-network
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
+    volumes:
+      - ../prefect:/root/.prefect
+      - ../../src:/app
 
 networks:
-  prefect-agent-network:
-    name: prefect-agent-network
+  prefect-gpu-agent-network:
+    name: prefect-gpu-agent-network
