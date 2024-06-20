@@ -5,9 +5,14 @@ FROM nvidia/cuda:11.2.2-cudnn8-runtime-ubuntu20.04
 WORKDIR /app
 
 # Install necessary packages
-RUN apt-get update && \
-    apt-get install -y python3-pip && \
+RUN apt-get update && apt-get -y install tzdata
+ENV TZ=Etc/UTC
+RUN dpkg-reconfigure --frontend noninteractive tzdata
+
+
+RUN apt-get install -y python3-pip && \
     rm -rf /var/lib/apt/lists/*
+
 
 # Install Prefect
 RUN pip3 install prefect

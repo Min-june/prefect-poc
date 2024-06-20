@@ -6,8 +6,15 @@ services:
     runtime: nvidia
     env_file:
       - .env
-    networks:
-      - prefect-gpu-agent-network
+    network_mode: host
+    entrypoint:
+      [
+        "prefect",
+        "worker",
+        "start",
+        "--pool",
+        "GPUJobPool"
+      ]
     deploy:
       resources:
         reservations:
@@ -18,7 +25,3 @@ services:
     volumes:
       - ../prefect:/root/.prefect
       - ../../src:/app
-
-networks:
-  prefect-gpu-agent-network:
-    name: prefect-gpu-agent-network

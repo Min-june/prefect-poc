@@ -4,6 +4,7 @@ services:
     image: prefecthq/prefect:2-python3.10
     restart: always
     platform: linux/amd64
+    network_mode: host
     volumes:
       - ../prefect:/root/.prefect
       - ../../src:/app
@@ -17,9 +18,3 @@ services:
       ]
     env_file:
       - .env
-    networks:
-      - prefect-agent-network
-
-networks:
-  prefect-agent-network:
-    name: prefect-agent-network
